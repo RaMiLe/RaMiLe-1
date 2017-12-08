@@ -79,7 +79,7 @@ $db = "registration";
 // Connect to database.
 try {
     $conn = new PDO
-( "sqlsrv:Server= $host ; Database = $db ", $user, $pwd);
+$conn = new PDO("sqlsrv:server = tcp:rom.database.windows.net,1433; Database = Rus", "ramil1997", "Rosbank1997");
     $conn->setAttribute
 ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 }
@@ -96,7 +96,7 @@ try {
     $date = date("Y-m-d");
     // Insert data
     $sql_insert = 
-"INSERT INTO registration_tbl (name, email, date) 
+"INSERT INTO registration_tb (name, email, date) 
                    VALUES (?,?,?)";
     $stmt = $conn->prepare($sql_insert);
     $stmt->bindValue(1, $name);
