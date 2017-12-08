@@ -42,7 +42,6 @@ name="submit" value="Submit" />
 </body>
 </html>
 
-Внутри тегов PHP добавьте код PHP для подключения к базе данных.
 
 // DB connection info
 $host = "localhost\sqlexpress";
