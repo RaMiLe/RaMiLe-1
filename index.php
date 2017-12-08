@@ -39,7 +39,7 @@ name="submit" value="Submit" />
 
 
 ?>
-</body>
+
 
 
 
@@ -101,5 +101,7 @@ if(count($registrants) > 0) {
 } else {
     echo "<h3>No one is currently registered.</h3>";
 }
-
+</body>
 </html>
+</html>
+?>
