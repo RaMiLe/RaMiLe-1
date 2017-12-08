@@ -72,10 +72,7 @@ name="submit" value="Submit" />
 Внутри тегов PHP добавьте код PHP для подключения к базе данных.
 
 // DB connection info
-$host = "localhost\sqlexpress";
-$user = "user name";
-$pwd = "password";
-$db = "registration";
+
 // Connect to database.
 try {
     $conn = new PDO
@@ -129,3 +126,4 @@ if(count($registrants) > 0) {
     echo "</table>";
 } else {
     echo "<h3>No one is currently registered.</h3>";
+?>
