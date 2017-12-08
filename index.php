@@ -102,3 +102,4 @@ if(count($registrants) > 0) {
     echo "<h3>No one is currently registered.</h3>";
 }
 
+</html>
