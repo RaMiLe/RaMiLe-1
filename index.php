@@ -1,3 +1,30 @@
+<?php
+// DB connection info
+$host = "localhost\sqlexpress";
+$user = "user name";
+$pwd = "password";
+$db = "registration";
+try{
+    $conn = new PDO
+( "sqlsrv:Server= $host ; Database = $db ", $user, $pwd);
+    $conn->setAttribute
+( PDO::ATTR_ERRMODE, 
+PDO::ERRMODE_EXCEPTION );
+    $sql = "CREATE TABLE registration_tbl(
+    id INT NOT NULL IDENTITY(1,1) 
+    PRIMARY KEY(id),
+    name VARCHAR(30),
+    email VARCHAR(30),
+    date DATE)";
+    $conn->query($sql);
+}
+catch(Exception $e){
+    die(print_r($e));
+}
+echo "<h3>Table created.</h3>";
+?>
+
+
 <html>
 <head>
 <Title>Registration Form</Title>
@@ -36,19 +63,56 @@ name="email" id="email"/></br>
 name="submit" value="Submit" />
 </form>
 <?php
+
+
 ?>
 </body>
 </html>
 
+Внутри тегов PHP добавьте код PHP для подключения к базе данных.
 
-
+// DB connection info
+$host = "localhost\sqlexpress";
+$user = "user name";
+$pwd = "password";
+$db = "registration";
+// Connect to database.
 try {
-    $conn = new PDO("sqlsrv:server = tcp:rom.database.windows.net,1433; Database = Rus", "ramil1997", "Rosbank1997");
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+    $conn = new PDO
+( "sqlsrv:Server= $host ; Database = $db ", $user, $pwd);
+    $conn->setAttribute
+( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 }
 catch(Exception $e){
-die(var_dump($e));
-$sql_select = "SELECT * FROM registration_tb";
+    die(var_dump($e));
+}
+
+
+
+if(!empty($_POST)) {
+try {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $date = date("Y-m-d");
+    // Insert data
+    $sql_insert = 
+"INSERT INTO registration_tbl (name, email, date) 
+                   VALUES (?,?,?)";
+    $stmt = $conn->prepare($sql_insert);
+    $stmt->bindValue(1, $name);
+    $stmt->bindValue(2, $email);
+    $stmt->bindValue(3, $date);
+    $stmt->execute();
+}
+catch(Exception $e) {
+    die(var_dump($e));
+}
+echo "<h3>Your're registered!</h3>";
+}
+
+
+
+$sql_select = "SELECT * FROM registration_tbl";
 $stmt = $conn->query($sql_select);
 $registrants = $stmt->fetchAll(); 
 if(count($registrants) > 0) {
@@ -65,4 +129,3 @@ if(count($registrants) > 0) {
     echo "</table>";
 } else {
     echo "<h3>No one is currently registered.</h3>";
-}
