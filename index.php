@@ -52,7 +52,7 @@ $db = "registration";
 // Connect to database.
 try {
     $conn = new PDO
-( "sqlsrv:Server= $host ; Database = $db ", $user, $pwd);
+$conn = new PDO("sqlsrv:server = tcp:rom.database.windows.net,1433; Database = Rus", "ramil1997", "Rosbank1997");
     $conn->setAttribute
 ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 }
@@ -60,9 +60,6 @@ catch(Exception $e){
     die(var_dump($e));
 }
 
-Примечание. Потребуется еще раз обновить значения и локальным именем пользователя и паролем MySQL.
-
-После кода подключения к базе данных добавьте код для вставки регистрационных данных в базу данных.
 
 if(!empty($_POST)) {
 try {
@@ -85,7 +82,7 @@ catch(Exception $e) {
 echo "<h3>Your're registered!</h3>";
 }
 
-И наконец, после указанного выше кода добавьте код для извлечения данных из базы данных.
+
 
 $sql_select = "SELECT * FROM registration_tbl";
 $stmt = $conn->query($sql_select);
