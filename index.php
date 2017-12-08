@@ -40,7 +40,7 @@ name="submit" value="Submit" />
 
 ?>
 </body>
-</html>
+
 
 
 // DB connection info
